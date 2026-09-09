@@ -1,69 +1,152 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const produtos = [
+  {
+    nome: "jaqueta vintage",
+    categoria: "roupas",
+    preco: "R$ 220",
+    imagem: "/produtos/jaqueta.png",
+    alt: "jaqueta vintage colorida",
+  },
+  {
+    nome: "bolsa vintage",
+    categoria: "acessórios",
+    preco: "R$ 790",
+    imagem: "/produtos/bolsa.png",
+    alt: "bolsa vintage preta",
+  },
+  {
+    nome: "tricô rosa",
+    categoria: "roupas",
+    preco: "R$ 470",
+    imagem: "/produtos/tricot.png",
+    alt: "tricô rosa",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main>
+      <header className="topbar">
+        <div className="brand">ReUse!</div>
+
+        <nav>
+          <Link href="/">Início</Link>
+          <Link href="/produtos">Explorar</Link>
+          <Link href="/favoritos">Favoritos</Link>
+          <Link href="/perfil">Perfil</Link>
+        </nav>
+      </header>
+
+      <section className="hero">
+        <div className="hero-copy">
+          <span className="eyebrow">SECOND HAND, FIRST CHOICE.</span>
+
+          <h1>
+            coisinhas boas
+            <br />
+            merecem
+            <br />
+            outra vida.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p>
+            moda, objetos, arte e outras coisas boas procurando uma próxima
+            história.
           </p>
+
+          <div className="hero-actions">
+            <Link href="/produtos" className="button-primary">
+              GARIMPAR →
+            </Link>
+
+            <Link href="/cadastrar" className="button-secondary">
+              DESAPEGAR →
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="hero-art">
+          <div className="poster poster-pink">
+            GAROTAS LEGAIS
+            <br />
+            USAM ROUPA
+            <br />
+            DE BRECHÓ.
+          </div>
+
+          <div className="poster poster-yellow">
+            RE-USE
+            <br />
+            RE-WEAR
+            <br />
+            RE-LOVE
+          </div>
+
+          <div className="poster poster-green">
+            MODA
+            <br />
+            CIRCULAR
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="manifesto">
+        <p>menos lixo.</p>
+        <p>mais estilo.</p>
+        <p>mais histórias.</p>
+        <p>mais reuso.</p>
+      </section>
+
+      <section className="garimpos">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">NOVOS NO GARIMPO</span>
+            <h2>achadinhos da semana.</h2>
+          </div>
+
+          <Link href="/produtos">VER TODOS →</Link>
+        </div>
+
+        <div className="product-grid">
+          {produtos.map((produto) => (
+            <article className="product-card" key={produto.nome}>
+              <div className="product-image">
+                <img src={produto.imagem} alt={produto.alt} />
+
+                <span className="product-tag">{produto.categoria}</span>
+              </div>
+
+              <div className="product-info">
+                <div>
+                  <h3>{produto.nome}</h3>
+                  <p>{produto.categoria}</p>
+                </div>
+
+                <strong>{produto.preco}</strong>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="closing">
+        <p className="eyebrow">RE-USE / RE-WEAR / RE-PEAT</p>
+
+        <h2>
+          ei, psiu? comprar usado
+          <br />
+          não é segunda opção.
+        </h2>
+
+        <Link href="/produtos">COMEÇAR A GARIMPAR →</Link>
+      </section>
+
+      <footer>
+        <strong>ReUse!</strong>
+        <span>São Paulo, Brasil — 2026</span>
+        <span>Moda circular. Impacto real.</span>
+      </footer>
+    </main>
   );
 }
